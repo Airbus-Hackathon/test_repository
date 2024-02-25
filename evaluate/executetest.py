@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException
 import pytorch_lightning as pl
 import subprocess
 import json
+import sys
 
 tokenizer = BartTokenizer.from_pretrained('facebook/bart-large', add_prefix_space=True)
 bart_model = BartForConditionalGeneration.from_pretrained('facebook/bart-large')
@@ -27,7 +28,7 @@ for i, row in airbus_test.iterrows():
     print('.')
     inputs = tokenizer(row['original_text'], return_tensors="pt", max_length=512, truncation=True)
     generated_text = loaded_model.generate_text(inputs, eval_beams=5)
-    airbus_test.at[i, 'generated_summary'] = generated_text[0]
+    airbus_test.at[i, 'generated_summary'] = generated_text[0].strip()
 print('résumés générés')
 
 airbus_test.set_index('index', inplace=True)
@@ -47,8 +48,10 @@ with open('../datasets/results/jsongenerated.json', 'w') as json_file:
     
 print('fichier json généré')
 
+
+
 print('évaluation des résumés')
-commande = ["python", "evaluate.py", "-r", "../datasets/test/test_set.json", "-g", "../datasets/results/jsongenerated.json"]
+commande = [sys.executable, "evaluate.py", "-r", "../datasets/test/test_set.json", "-g", "../datasets/results/jsongenerated.json"]
 
 # Exécuter la commande
 subprocess.run(commande)
