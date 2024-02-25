@@ -11,13 +11,17 @@ It seems there is no reference text in the test dataset (test_set.json) provided
 The [evaluate script](./evaluate/executetest.py) will use the model located in the [checkpoints folder](./checkpoints) (the one to create and where you place the model into - see below).
 and use the generated [test set file](./datasets/test/test_set.json) as an input file on which it will produce summary using the model, then the evaluation script will be launched automatically and generate reports that will be placed under the [evaluation reports folder](./evaluations%20reports/)
 
+## Download the model checkpoint file
+
+[download the output.ckpt file](https://drive.usercontent.google.com/download?id=1U6mFv9Q4EbBwaqzqP0jSRI85fkCAGtUL&export=download)
+
+Please rename the file to: output.ckpt
+
 ## Start in development
 
 ```bash
 # create a checkpoints directory at root of the directory
-mkdir -p checkpoints
-# download model from file server
-curl -o ./checkpoints/output.ckpt -L https://drive.google.com/file/d/1U6mFv9Q4EbBwaqzqP0jSRI85fkCAGtUL/view?usp=sharing
+mkdir -p ./checkpoints
 # install dependencies
 cd evaluate && pip install -r requirements.txt
 cd evaluate && ./executetest.py
