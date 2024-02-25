@@ -18,7 +18,7 @@ special_tokens_dict = {'additional_special_tokens': new_tokens}
 num_added_toks = tokenizer.add_special_tokens(special_tokens_dict)
 bart_model.resize_token_embeddings(len(tokenizer))
 
-loaded_model = LitModel.load_from_checkpoint("../checkpoints/outputtrainedairbustestsaved.ckpt", learning_rate=2e-5, tokenizer=tokenizer, model=bart_model)
+loaded_model = LitModel.load_from_checkpoint("../checkpoints/output.ckpt", learning_rate=2e-5, tokenizer=tokenizer, model=bart_model)
 
 
 for i, row in airbus_test.iterrows():
