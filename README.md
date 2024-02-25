@@ -15,7 +15,7 @@ and use the generated [test set file](./datasets/test/test_set.json) as an input
 
 [download the output.ckpt file](https://drive.usercontent.google.com/download?id=1U6mFv9Q4EbBwaqzqP0jSRI85fkCAGtUL&export=download)
 
-Please rename the file to: output.ckpt
+Please rename the file to: output.ckpt and place it into the ./checkpoints directory
 
 ## Start in development
 
