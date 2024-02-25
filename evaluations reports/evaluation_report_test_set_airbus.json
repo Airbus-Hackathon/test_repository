@@ -1,0 +1,31 @@
+{
+    "Rouge": {
+        "rouge1": {
+            "fmeasure": "0.6838897038964631",
+            "precision": "0.9827701741867155",
+            "recall": "0.5561534264750637"
+        },
+        "rouge2": {
+            "fmeasure": "0.628452189932492",
+            "precision": "0.9119420653276715",
+            "recall": "0.5101097794976491"
+        },
+        "rougeL": {
+            "fmeasure": "0.6750497813311414",
+            "precision": "0.9670739335852115",
+            "recall": "0.5493412132307468"
+        }
+    },
+    "Similarity": {
+        "similarity_with_original_text": {
+            "mean": "0.8692144",
+            "median": "0.88902366",
+            "std": "0.09222559"
+        },
+        "similarity_with_reference_summary": {
+            "mean": "0.8692144",
+            "median": "0.88902366",
+            "std": "0.09222559"
+        }
+    }
+}
