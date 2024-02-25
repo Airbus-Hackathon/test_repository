@@ -60,7 +60,7 @@ class HackathonMetrics():
             scores.append(
                 scorer.score(
                     self.reference_dataset.get(text_uid).get(
-                        "reference_summary"
+                        "original_text"
                     ),
                     self.generated_dataset.get(text_uid).get(
                         "generated_summary"
@@ -84,13 +84,9 @@ class HackathonMetrics():
         return final_scores
 
     def compute_similarity_scores(self) -> dict[str, dict[str, str]]:
-        scores_with_reference = []
         scores_with_original_text = []
         for text_uid in self.generated_dataset.keys():
-            reference_embeddings = self.semantic_model.encode(
-                self.reference_dataset.get(text_uid).get("reference_summary"),
-                convert_to_tensor=True
-            )
+            
             original_text_embeddings = self.semantic_model.encode(
                 self.reference_dataset.get(text_uid).get("original_text"),
                 convert_to_tensor=True
@@ -99,22 +95,12 @@ class HackathonMetrics():
                 self.generated_dataset.get(text_uid).get("generated_summary"),
                 convert_to_tensor=True
             )
-            scores_with_reference.append(
-                util.cos_sim(
-                    reference_embeddings,
-                    generated_embeddings).cpu()
-            )
             scores_with_original_text.append(
                 util.cos_sim(
                     original_text_embeddings,
                     generated_embeddings).cpu()
             )
         final_scores = {
-            "similarity_with_reference_summary": {
-                "mean":   str(np.mean(scores_with_reference)),
-                "median": str(np.median(scores_with_reference)),
-                "std":    str(np.std(scores_with_reference))
-            },
             "similarity_with_original_text": {
                 "mean":   str(np.mean(scores_with_original_text)),
                 "median": str(np.median(scores_with_original_text)),
