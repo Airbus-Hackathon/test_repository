@@ -24,5 +24,5 @@ Please rename the file to: output.ckpt and place it into the ./checkpoints direc
 mkdir -p ./checkpoints
 # install dependencies
 cd evaluate && pip install -r requirements.txt
-cd evaluate && ./executetest.py
+python ./executetest.py
 ```
