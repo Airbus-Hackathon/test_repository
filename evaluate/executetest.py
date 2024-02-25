@@ -20,12 +20,15 @@ bart_model.resize_token_embeddings(len(tokenizer))
 
 loaded_model = LitModel.load_from_checkpoint("../checkpoints/output.ckpt", learning_rate=2e-5, tokenizer=tokenizer, model=bart_model)
 
+print('modèle chargé')
 
+print('génération des résumés')
 for i, row in airbus_test.iterrows():
+    print('.')
     inputs = tokenizer(row['original_text'], return_tensors="pt", max_length=512, truncation=True)
     generated_text = loaded_model.generate_text(inputs, eval_beams=5)
     airbus_test.at[i, 'generated_summary'] = generated_text[0]
-
+print('résumés générés')
 
 airbus_test.set_index('index', inplace=True)
 airbus_test = airbus_test.transpose()
@@ -37,11 +40,14 @@ for key, value in data_dict.items():
         'uid': value['uid'],
         'generated_summary': value['generated_summary']
     }
-
+    
 # Écrire le dictionnaire dans un fichier JSON
 with open('../datasets/results/jsongenerated.json', 'w') as json_file:
     json.dump(json_data_generated, json_file)
     
+print('fichier json généré')
+
+print('évaluation des résumés')
 commande = ["python", "evaluate.py", "-r", "../datasets/test/test_set.json", "-g", "../datasets/results/jsongenerated.json"]
 
 # Exécuter la commande

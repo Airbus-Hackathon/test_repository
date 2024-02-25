@@ -107,6 +107,7 @@ class HackathonMetrics():
                 "std":    str(np.std(scores_with_original_text))
             }
         }
+        print('scores retournés')
         return final_scores
 
     def evaluate(self) -> None:
